@@ -6,8 +6,9 @@ import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import { switchFavorite } from '../../store/reducers';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { switchFavorite } from '../../store/reducers/item';
+import { switchCart } from '../../store/reducers/cart';
 import { useDispatch } from 'react-redux';
 
 export default function CardItem({ id, name, description, image, alt, favorite }) {
@@ -16,6 +17,10 @@ export default function CardItem({ id, name, description, image, alt, favorite }
 
     function resolveFavorite() {
         dispatch(switchFavorite(id))
+    }
+
+    function resolveCart() {
+        dispatch(switchCart(id))
     }
 
     return (
@@ -31,11 +36,13 @@ export default function CardItem({ id, name, description, image, alt, favorite }
             <Typography variant="body2" color="text.secondary">{description}</Typography>
         </CardContent>
         <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-                {favorite ? <FavoriteIcon style={{color: '#ff0000'}} onClick={resolveFavorite} /> : <FavoriteIcon style={{color: '#696969'}} onClick={resolveFavorite} />}
+            <IconButton aria-label="add to favorites" onClick={() => resolveFavorite()}>
+                {favorite ? <FavoriteIcon style={{color: '#ff0000'}}  /> : <FavoriteIcon style={{color: '#696969'}} />}
             </IconButton>
             <IconButton aria-label="share">
-            <ShareIcon />
+            <ShoppingCartIcon onClick={() => resolveCart()}> 
+                {favorite ? <FavoriteIcon style={{color: '#31d61b'}}  /> : <FavoriteIcon style={{color: '#696969'}} />}
+            </ShoppingCartIcon>
             </IconButton>
         </CardActions>
         </Card>
