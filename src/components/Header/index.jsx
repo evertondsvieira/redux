@@ -72,6 +72,7 @@ export default function Header() {
           >
             AT Group
           </Typography>
+          <Typography variant="h6"sx={{ marginRight: 3, cursor: 'pointer' }}>Carrinho</Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
